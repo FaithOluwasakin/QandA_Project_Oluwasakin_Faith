@@ -1,17 +1,12 @@
-# app.py
 import os
-import re
 import nltk
 from flask import Flask, render_template, request
 from google import genai
 
-# NOTE: You must have the GEMINI_API_KEY environment variable set for deployment!
-
-# Download necessary NLTK data (for web server)
-try:
-    nltk.data.find('tokenizers/punkt')
-except nltk.downloader.DownloadError:
-    nltk.download('punkt')
+# NOTE: Download NLTK data directly.
+# If 'punkt' is already downloaded, nltk.download() will skip it,
+# making this method safe and idempotent (runnable multiple times safely).
+nltk.download('punkt')
 
 app = Flask(__name__)
 
